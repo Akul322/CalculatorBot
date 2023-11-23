@@ -31,6 +31,7 @@ namespace CalculatorBot
             AppSettings appSettings = BuildAppSettings();
             services.AddSingleton(BuildAppSettings());
 
+            services.AddTransient<TextFunctions>();
             services.AddTransient<DefaultMessageController>();
             services.AddTransient<TextMessageController>();
             services.AddTransient<InlineKeyboardController>();
@@ -44,7 +45,7 @@ namespace CalculatorBot
         {
             return new AppSettings()
             {
-                BotToken = "Он тут есть, то есть был",
+                BotToken = "6929686587:AAGPjk7oZy_dcK90NPbrBbpGgV4WE7mgHEE",
             };
         }
     }
