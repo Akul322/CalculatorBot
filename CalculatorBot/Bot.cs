@@ -56,7 +56,7 @@ namespace CalculatorBot
                 switch (update.Message!.Type)
                 {
                     case MessageType.Text:
-                        await _textMessageController.Handle(update.Message, cancellationToken);
+                        await _textMessageController.Handle(update.Message, cancellationToken );
                         return;
                     default:
                         await _defaultMessageController.Handle(update.Message, cancellationToken);
