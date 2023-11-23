@@ -3,6 +3,7 @@ using Telegram.Bot;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 using CalculatorBot.Services;
+using System.Threading;
 
 namespace CalculatorBot.Controllers
 {

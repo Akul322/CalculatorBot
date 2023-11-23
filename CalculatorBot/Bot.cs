@@ -41,12 +41,14 @@ namespace CalculatorBot
             Console.WriteLine("Бот запущен.");
         }
 
+        public string _command { get; set; }
+
         async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
         {
             //  Обрабатываем нажатия на кнопки  из Telegram Bot API: https://core.telegram.org/bots/api#callbackquery
             if (update.Type == UpdateType.CallbackQuery)
             {
-                await _inlineKeyboardController.Handle(update.CallbackQuery, cancellationToken);
+                _command = await _inlineKeyboardController.Handle(update.CallbackQuery, cancellationToken);
                 return;
             }
 
@@ -55,8 +57,9 @@ namespace CalculatorBot
             {
                 switch (update.Message!.Type)
                 {
+                    
                     case MessageType.Text:
-                        await _textMessageController.Handle(update.Message, cancellationToken );
+                        await _textMessageController.Handle(update.Message, _command, cancellationToken);
                         return;
                     default:
                         await _defaultMessageController.Handle(update.Message, cancellationToken);

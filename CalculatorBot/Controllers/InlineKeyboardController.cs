@@ -16,10 +16,10 @@ namespace CalculatorBot.Controllers
             _memoryStorage = memoryStorage;
         }
 
-        public async Task Handle(CallbackQuery? callbackQuery, CancellationToken ct)
+        public async Task<string> Handle(CallbackQuery? callbackQuery, CancellationToken ct)
         {
             if (callbackQuery?.Data == null)
-                return;
+                return "";
 
             // Обновление пользовательской сессии новыми данными
             _memoryStorage.GetSession(callbackQuery.From.Id).LanguageCode = callbackQuery.Data;
@@ -36,6 +36,7 @@ namespace CalculatorBot.Controllers
             await _telegramClient.SendTextMessageAsync(callbackQuery.From.Id,
                 $"<b>Вы выбрали  - {languageText}.{Environment.NewLine}</b>" +
                 $"{Environment.NewLine}Вы можете поменять настройки в любой момент в главном меню", cancellationToken: ct, parseMode: ParseMode.Html);
+            return callbackQuery.Data;
         }
     }
 }
